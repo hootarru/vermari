@@ -124,24 +124,27 @@
     .about-side .about-photo{aspect-ratio:1/1;}
   }
 
-  /* ---------------- CATALOG (mosaic) ---------------- */
+  /* ---------------- CATALOG (category cards) ---------------- */
   .catalog{padding:140px 0; border-top:1px solid var(--line);}
   .catalog-head{display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:56px; flex-wrap:wrap; gap:20px;}
   .catalog-head h2{font-size:clamp(34px,4vw,52px);}
-  .mosaic{
-    columns:4 260px; column-gap:18px;
+  .categories-grid{
+    display:grid; grid-template-columns:repeat(3, 1fr); gap:28px;
   }
-  .mosaic-item{
-    position:relative; break-inside:avoid; margin-bottom:18px; overflow:hidden;
+  .category-card{display:flex; flex-direction:column;}
+  .category-photo{
+    aspect-ratio:3/4; background:var(--sand); border:1px solid var(--line);
+    overflow:hidden; position:relative;
   }
-  .mosaic-item .photo img{width:100%; height:auto; display:block; transition:transform .5s ease;}
-  .mosaic-item:hover .photo img{transform:scale(1.03);}
-  .ph-fallback.mosaic-fallback{
-    aspect-ratio:1/1; width:100%;
+  .category-photo img{width:100%; height:100%; object-fit:cover; transition:transform .5s ease;}
+  .category-card:hover .category-photo img{transform:scale(1.04);}
+  .category-name{
+    margin-top:16px; text-align:center; font-family:'Manrope'; font-weight:700;
+    font-size:15px; letter-spacing:0.06em; text-transform:uppercase; color:var(--ink);
   }
 
   @media (max-width:900px){
-    .mosaic{columns:2 160px;}
+    .categories-grid{grid-template-columns:repeat(2, 1fr); gap:18px;}
   }
 
   /* ---------------- GIFT CARDS ---------------- */
@@ -266,7 +269,71 @@
         <h2>Керамика, которая наполняет дом уютом</h2>
       </div>
     </div>
-    <div class="mosaic" id="mosaicGrid"></div>
+    <div class="categories-grid">
+      <div class="category-card" data-reveal>
+        <div class="category-photo">
+          <img src="images/cup1.jpg" alt="Чашки ВЕРМАРИ" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+          <div class="ph-fallback">cup1.jpg</div>
+        </div>
+        <div class="category-name">Чашки</div>
+      </div>
+      <div class="category-card" data-reveal>
+        <div class="category-photo">
+          <img src="images/plate1.jpg" alt="Тарелки ВЕРМАРИ" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+          <div class="ph-fallback">plate1.jpg</div>
+        </div>
+        <div class="category-name">Тарелки</div>
+      </div>
+      <div class="category-card" data-reveal>
+        <div class="category-photo">
+          <img src="images/pano1.jpg" alt="Панно ВЕРМАРИ" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+          <div class="ph-fallback">pano1.jpg</div>
+        </div>
+        <div class="category-name">Панно</div>
+      </div>
+      <div class="category-card" data-reveal>
+        <div class="category-photo">
+          <img src="images/kettle1.jpg" alt="Чайники ВЕРМАРИ" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+          <div class="ph-fallback">kettle1.jpg</div>
+        </div>
+        <div class="category-name">Чайники</div>
+      </div>
+      <div class="category-card" data-reveal>
+        <div class="category-photo">
+          <img src="images/granat1.jpg" alt="Гранаты ВЕРМАРИ" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+          <div class="ph-fallback">granat1.jpg</div>
+        </div>
+        <div class="category-name">Гранаты</div>
+      </div>
+      <div class="category-card" data-reveal>
+        <div class="category-photo">
+          <img src="images/toy1.jpg" alt="Игрушки ВЕРМАРИ" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+          <div class="ph-fallback">toy1.jpg</div>
+        </div>
+        <div class="category-name">Игрушки</div>
+      </div>
+      <div class="category-card" data-reveal>
+        <div class="category-photo">
+          <img src="images/mini1.jpg" alt="Мини ВЕРМАРИ" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+          <div class="ph-fallback">mini1.jpg</div>
+        </div>
+        <div class="category-name">Мини (подвески и маленькие объекты)</div>
+      </div>
+      <div class="category-card" data-reveal>
+        <div class="category-photo">
+          <img src="images/vase1.jpg" alt="Вазы ВЕРМАРИ" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+          <div class="ph-fallback">vase1.jpg</div>
+        </div>
+        <div class="category-name">Вазы</div>
+      </div>
+      <div class="category-card" data-reveal>
+        <div class="category-photo">
+          <img src="images/other1.jpg" alt="Прочее ВЕРМАРИ" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+          <div class="ph-fallback">other1.jpg</div>
+        </div>
+        <div class="category-name">Прочее (интерьерные штуки)</div>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -324,65 +391,6 @@
 <button id="toTop" aria-label="Наверх">↑</button>
 
 <script>
-/* =================================================================
-   ДАННЫЕ КАТАЛОГА — редактируйте название и цену прямо здесь.
-   Чтобы заменить фото — просто положите файл с таким же именем
-   в папку images/ рядом с index.html.
-================================================================= */
-const PRODUCTS = [
-  { name:"Чашка «Полдень»", price:"1 800 ₽", img:"images/cup1.jpg", cat:"Чашки" },
-  { name:"Чашка «Роса»", price:"1 700 ₽", img:"images/cup2.jpg", cat:"Чашки" },
-  { name:"Чашка «Тень»", price:"1 900 ₽", img:"images/cup3.jpg", cat:"Чашки" },
-  { name:"Чашка «Иней»", price:"1 800 ₽", img:"images/cup4.jpg", cat:"Чашки" },
-  { name:"Чашка «Полынь»", price:"1 750 ₽", img:"images/cup5.jpg", cat:"Чашки" },
-  { name:"Чашка «Уголь»", price:"1 850 ₽", img:"images/cup6.jpg", cat:"Чашки" },
-  { name:"Чашка «Дым»", price:"1 800 ₽", img:"images/cup7.jpg", cat:"Чашки" },
-  { name:"Чашка «Мёд»", price:"1 900 ₽", img:"images/cup8.jpg", cat:"Чашки" },
-  { name:"Чашка «Глина»", price:"1 700 ₽", img:"images/cup9.jpg", cat:"Чашки" },
-  { name:"Чашка «Песок»", price:"1 800 ₽", img:"images/cup10.jpg", cat:"Чашки" },
-  { name:"Чашка «Соль»", price:"1 750 ₽", img:"images/cup11.png", cat:"Чашки" },
-  { name:"Чашка «Зола»", price:"1 900 ₽", img:"images/cup12.jpg", cat:"Чашки" },
-  { name:"Чашка «Ветер»", price:"1 800 ₽", img:"images/cup13.jpg", cat:"Чашки" },
-  { name:"Чайник «Вечер»", price:"4 200 ₽", img:"images/kettle_1.jpg", cat:"Чайники" },
-  { name:"Чайник «Рассвет»", price:"4 500 ₽", img:"images/kettle_2.jpg", cat:"Чайники" },
-  { name:"Гранат №1", price:"2 400 ₽", img:"images/gr_1.jpg", cat:"Гранаты" },
-  { name:"Гранат №2", price:"2 400 ₽", img:"images/gr_2.jpg", cat:"Гранаты" },
-  { name:"Гранат №3", price:"2 600 ₽", img:"images/gr_3.jpg", cat:"Гранаты" },
-  { name:"Гранат №4", price:"2 400 ₽", img:"images/gr_4.jpg", cat:"Гранаты" },
-  { name:"Гранат №5", price:"2 500 ₽", img:"images/gr_5.jpg", cat:"Гранаты" },
-  { name:"Гранат №6", price:"2 600 ₽", img:"images/gr_71.jpg", cat:"Гранаты" },
-  { name:"Гранат №7", price:"2 500 ₽", img:"images/gr_72.jpg", cat:"Гранаты" },
-  { name:"Панно «Дом»", price:"3 200 ₽", img:"images/pano1.jpg", cat:"Панно" },
-  { name:"Панно «Сад»", price:"3 000 ₽", img:"images/pano2.jpg", cat:"Панно" },
-  { name:"Панно «Луна»", price:"3 400 ₽", img:"images/pano3.jpg", cat:"Панно" },
-  { name:"Панно «Улица»", price:"3 200 ₽", img:"images/pano4.jpg", cat:"Панно" },
-  { name:"Панно «Утро»", price:"3 100 ₽", img:"images/pano5.jpg", cat:"Панно" },
-  { name:"Панно «Тепло»", price:"3 300 ₽", img:"images/pano6.jpg", cat:"Панно" },
-  { name:"Панно «Тишина»", price:"3 200 ₽", img:"images/pano7.jpg", cat:"Панно" },
-  { name:"Тарелка «Земля»", price:"2 100 ₽", img:"images/plate1.jpg", cat:"Тарелки" },
-  { name:"Тарелка «Земля II»", price:"2 100 ₽", img:"images/plate1_1.jpg", cat:"Тарелки" },
-  { name:"Тарелка «Небо»", price:"2 200 ₽", img:"images/plate2.jpg", cat:"Тарелки" },
-  { name:"Тарелка «Вода»", price:"2 000 ₽", img:"images/plate3.jpg", cat:"Тарелки" },
-  { name:"Тарелка «Огонь»", price:"2 300 ₽", img:"images/plate4.jpg", cat:"Тарелки" },
-  { name:"Тарелка «Воздух»", price:"2 200 ₽", img:"images/plate5.jpg", cat:"Тарелки" }
-];
-
-function renderMosaic(){
-  const grid = document.getElementById('mosaicGrid');
-  grid.innerHTML = PRODUCTS.map((p) => {
-    return `
-      <div class="mosaic-item" data-reveal>
-        <div class="photo">
-          <img src="${p.img}" alt="Керамика ВЕРМАРИ" loading="lazy"
-               onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-          <div class="ph-fallback mosaic-fallback">${p.img.split('/').pop()}</div>
-        </div>
-      </div>`;
-  }).join('');
-  observeReveals();
-}
-renderMosaic();
-
 /* =================================================================
    SCROLL REVEAL
 ================================================================= */
