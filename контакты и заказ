@@ -423,7 +423,7 @@
       <h2>Готовы оформить заказ?</h2>
       <p class="contact-order-lede">Оставьте заявку — ответим в течение дня и подберём изделие под ваш запрос, обсудим доставку и оплату.</p>
 
-      <form class="order-form" action="https://formspree.io/f/ВАШ_КЛЮЧ" method="POST">
+      <form class="order-form" action="https://formspree.io/f/mpqvwwlw" method="POST">
         <div>
           <label for="orderName">Имя</label>
           <input type="text" id="orderName" name="name" placeholder="Как к вам обращаться" required>
