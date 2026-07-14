@@ -195,8 +195,52 @@
     .wrap{padding:0 22px;}
     .nav-inner{padding:0 22px;}
   }
-</style>
-</head>
+  /* ---------------- CONTACT & ORDER (новая секция) ---------------- */
+  .contact-order{
+    padding:150px 0 160px; border-top:1px solid var(--line);
+    background:var(--sand);
+  }
+  .contact-order-inner{
+    display:grid; grid-template-columns:1.1fr 0.9fr; gap:70px; align-items:start;
+  }
+  .contact-order h2{font-size:clamp(32px,4vw,48px); margin-bottom:18px;}
+  .contact-order-lede{color:var(--muted); font-size:16px; max-width:44ch; margin-bottom:40px;}
+
+  .order-form{display:flex; flex-direction:column; gap:20px;}
+  .order-form label{
+    font-size:13px; font-weight:600; letter-spacing:0.03em; text-transform:uppercase;
+    color:var(--graphite); margin-bottom:8px; display:block;
+  }
+  .order-form input, .order-form textarea{
+    width:100%; padding:16px 18px; border-radius:4px; border:1px solid var(--line);
+    background:#fff; font-family:'Inter', sans-serif; font-size:15px; color:var(--ink);
+  }
+  .order-form input:focus, .order-form textarea:focus{outline:none; border-color:var(--accent);}
+  .order-form textarea{min-height:150px; resize:vertical;}
+  .order-form .btn{align-self:flex-start; margin-top:6px; border:none;}
+  .order-form-note{font-size:12px; color:var(--muted); margin-top:-6px;}
+
+  .contact-side{
+    background:#fff; border:1px solid var(--line); border-radius:6px; padding:44px;
+  }
+  .contact-side h3{font-size:20px; margin-bottom:14px;}
+  .contact-side p{color:var(--muted); font-size:14px; margin-bottom:28px;}
+  .social-links{display:flex; flex-direction:column; gap:14px;}
+  .social-btn{
+    display:flex; align-items:center; justify-content:space-between; gap:12px;
+    padding:16px 20px; border-radius:4px; border:1px solid var(--line);
+    background:var(--bg); font-size:14px; font-weight:600; color:var(--ink);
+    transition:border-color .2s, background .2s, transform .15s;
+  }
+  .social-btn:hover{border-color:var(--accent); background:#fff; transform:translateX(2px);}
+  .social-btn .arrow{color:var(--accent); font-size:16px;}
+
+  @media (max-width:900px){
+    .contact-order-inner{grid-template-columns:1fr; gap:44px;}
+    .contact-side{padding:32px;}
+  }
+
+
 <body>
 
 <header id="siteHeader">
@@ -219,7 +263,7 @@
         VÈRMARI
       </div>
       <p class="hero-sub">Авторская керамика Веры Марининой. Креативная керамика, которую хочется разглядывать.</p>
-      <a href="#catalog" class="btn">Смотреть изделия</a>
+      <a href="#catalog" class="btn">Смотреть коллекцию</a>
     </div>
     <div class="hero-photo" data-reveal>
       <img src="images/hero.jpg" alt="ВЕРМАРИ керамика" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
@@ -300,17 +344,17 @@
       </div>
       <div class="category-card" data-reveal>
         <div class="category-photo">
-          <img src="images/granat1.jpg" alt="Керамические фрукты ВЕРМАРИ" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+          <img src="images/granat1.jpg" alt="Гранаты ВЕРМАРИ" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
           <div class="ph-fallback">granat1.jpg</div>
         </div>
-        <div class="category-name">Керамические фрукты</div>
+        <div class="category-name">Гранаты</div>
       </div>
       <div class="category-card" data-reveal>
         <div class="category-photo">
-          <img src="images/toy1.jpg" alt="Скульптуры ВЕРМАРИ" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+          <img src="images/toy1.jpg" alt="Игрушки ВЕРМАРИ" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
           <div class="ph-fallback">toy1.jpg</div>
         </div>
-        <div class="category-name">Скульптуры</div>
+        <div class="category-name">Игрушки</div>
       </div>
       <div class="category-card" data-reveal>
         <div class="category-photo">
@@ -328,10 +372,10 @@
       </div>
       <div class="category-card" data-reveal>
         <div class="category-photo">
-          <img src="images/other1.jpg" alt="Предметы интерьера ВЕРМАРИ" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+          <img src="images/other1.jpg" alt="Прочее ВЕРМАРИ" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
           <div class="ph-fallback">other1.jpg</div>
         </div>
-        <div class="category-name">Предметы интерьера</div>
+        <div class="category-name">Прочее (интерьерные штуки)</div>
       </div>
     </div>
   </div>
@@ -387,6 +431,50 @@
     </div>
   </div>
 </footer>
+
+<!-- ================= КОНТАКТЫ И ЗАКАЗ ================= -->
+<section class="contact-order" id="contact-order">
+  <div class="wrap contact-order-inner">
+    <div data-reveal>
+      <div class="eyebrow">Контакты и заказ</div>
+      <h2>Готовы оформить заказ?</h2>
+      <p class="contact-order-lede">Оставьте заявку — ответим в течение дня и подберём изделие под ваш запрос, обсудим доставку и оплату.</p>
+
+      <form class="order-form" action="https://formspree.io/f/ВАШ_КЛЮЧ" method="POST">
+        <div>
+          <label for="orderName">Имя</label>
+          <input type="text" id="orderName" name="name" placeholder="Как к вам обращаться" required>
+        </div>
+        <div>
+          <label for="orderContact">Телефон или email</label>
+          <input type="text" id="orderContact" name="contact" placeholder="+7 ... или почта" required>
+        </div>
+        <div>
+          <label for="orderMessage">Ваш запрос</label>
+          <textarea id="orderMessage" name="message" placeholder="Расскажите, что вас интересует"></textarea>
+        </div>
+        <button type="submit" class="btn">Отправить заявку</button>
+        <div class="order-form-note">Форма отправляется на почту через Formspree — просто впишите свой ключ в атрибут action.</div>
+      </form>
+    </div>
+
+    <div class="contact-side" data-reveal>
+      <h3>Или напишите напрямую</h3>
+      <p>Выберите удобный способ связи — ответим в любом из них.</p>
+      <div class="social-links">
+        <a class="social-btn" href="https://t.me/vermari_ceramics" target="_blank" rel="noopener">
+          Telegram-канал <span class="arrow">→</span>
+        </a>
+        <a class="social-btn" href="https://t.me/vermari_ceramics?direct" target="_blank" rel="noopener">
+          Написать в Telegram <span class="arrow">→</span>
+        </a>
+        <a class="social-btn" href="https://www.instagram.com/vermari.ceramics" target="_blank" rel="noopener">
+          Instagram Direct <span class="arrow">→</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
 
 <button id="toTop" aria-label="Наверх">↑</button>
 
